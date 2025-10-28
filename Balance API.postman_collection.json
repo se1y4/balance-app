@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "32d123a0-7aaa-4477-8d2d-e5cf5710065c",
+		"name": "Balance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49606216",
+		"_collection_link": "https://speeding-crescent-2538377.postman.co/workspace/seiya's-Workspace~d54d5822-b7d3-4663-886b-81de134eaaa6/collection/49606216-32d123a0-7aaa-4477-8d2d-e5cf5710065c?action=share&source=collection_link&creator=49606216"
+	},
+	"item": [
+		{
+			"name": "Пополнение баланса",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Покупка/Списание",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Перевод",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Узнать баланс",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
