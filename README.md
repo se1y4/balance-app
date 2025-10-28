@@ -13,7 +13,6 @@ docker-compose exec app php artisan migrate
 ```
 # 4. (Опционально) Создай тестовых пользователей
 ```
-docker-compose exec app php artisan tinker
 docker-compose exec app php artisan make:seeder UserSeeder
 ```
 # В репозитории есть файл с настройками для Postman
