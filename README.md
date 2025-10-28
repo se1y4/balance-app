@@ -15,3 +15,11 @@ docker-compose exec app php artisan migrate
 ```
 docker-compose exec app php artisan make:seeder UserSeeder
 ```
+POST /api/deposit
+```
+{
+  "user_id": 1,
+  "amount": 500.00,
+  "comment": "Пополнение через карту"
+}
+```
