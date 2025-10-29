@@ -11,7 +11,7 @@ docker-compose up -d
 ```
 docker-compose exec app php artisan migrate
 ```
-4. (Опционально) Создай тестовых пользователей
+4. (Опционально) Создание тестовых пользователей
 ```
 docker-compose exec app php artisan make:seeder UserSeeder
 ```
