@@ -15,6 +15,10 @@ docker-compose exec app php artisan migrate
 ```
 docker-compose exec app php artisan make:seeder UserSeeder
 ```
+Запуск тестов
+```
+docker-compose exec app php artisan test
+```
 Пополнение баланса
 ```
 curl -X POST http://localhost:8000/api/deposit \
