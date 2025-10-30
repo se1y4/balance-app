@@ -7,47 +7,40 @@ use App\Http\Requests\WithdrawRequest;
 use App\Http\Requests\TransferRequest;
 use App\Services\BalanceService;
 use App\Repositories\BalanceRepository;
+use App\Http\Resources\BalanceResource;
 use Illuminate\Http\JsonResponse;
 
 class BalanceController extends Controller
 {
-    public function deposit(DepositRequest $request, BalanceService $service): JsonResponse
+    public function __construct(
+        private readonly BalanceService $balanceService,
+        private readonly BalanceRepository $balanceRepository
+    ) {}
+
+    public function deposit(DepositRequest $request): JsonResponse
     {
         try {
-            $service->deposit(
-                $request->user_id,
-                $request->amount,
-                $request->comment
-            );
+            $this->balanceService->deposit($request->toDto());
             return response()->json(['status' => 'ok']);
-        } catch (\Exception $e) {
+        } catch (\DomainException $e) {
             return response()->json(['error' => $e->getMessage()], 409);
         }
     }
 
-    public function withdraw(WithdrawRequest $request, BalanceService $service): JsonResponse
+    public function withdraw(WithdrawRequest $request): JsonResponse
     {
         try {
-            $service->withdraw(
-                $request->user_id,
-                $request->amount,
-                $request->comment
-            );
+            $this->balanceService->withdraw($request->toDto());
             return response()->json(['status' => 'ok']);
         } catch (\DomainException $e) {
             return response()->json(['error' => 'Insufficient funds'], 409);
         }
     }
 
-    public function transfer(TransferRequest $request, BalanceService $service): JsonResponse
+    public function transfer(TransferRequest $request): JsonResponse
     {
         try {
-            $service->transfer(
-                $request->from_user_id,
-                $request->to_user_id,
-                $request->amount,
-                $request->comment
-            );
+            $this->balanceService->transfer($request->toDto());
             return response()->json(['status' => 'ok']);
         } catch (\DomainException $e) {
             return response()->json(['error' => 'Insufficient funds'], 409);
@@ -56,12 +49,9 @@ class BalanceController extends Controller
         }
     }
 
-    public function balance(int $userId, BalanceRepository $repo): JsonResponse
+    public function balance(int $userId): BalanceResource
     {
-        $balance = $repo->getOrCreateByUserId($userId);
-        return response()->json([
-            'user_id' => $userId,
-            'balance' => (float) $balance->amount,
-        ]);
+        $balance = $this->balanceRepository->getOrCreateByUserId($userId);
+        return new BalanceResource($balance);
     }
 }

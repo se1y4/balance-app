@@ -27,4 +27,12 @@ class WithdrawRequest extends FormRequest
             'comment' => 'nullable|string|max:255',
         ];
     }
+    public function toDto(): DepositDto
+    {
+        return new DepositDto(
+            userId: $this->user_id,
+            amount: $this->amount,
+            comment: $this->comment,
+        );
+    }
 }

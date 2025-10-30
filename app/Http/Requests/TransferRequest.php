@@ -28,4 +28,13 @@ class TransferRequest extends FormRequest
             'comment' => 'nullable|string|max:255',
         ];
     }
+    public function toDto(): DepositDto
+    {
+        return new DepositDto(
+            from_user_id: $this->from_user_id,
+            to_user_id: $this->to_user_id,
+            amount: $this->amount,
+            comment: $this->comment,
+        );
+    }
 }
